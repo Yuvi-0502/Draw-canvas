@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .size-box
+    {
+        width:100px;
+        height:30px ;
+        border: 1px solid gray;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        
+    }
+    .size
+    {
+        background-color: lightblue;
+        border-radius: 50%;
+    }
+    .size1
+    {
+        height: 10px;
+        width: 10px;
+    }
+    .size2
+    {
+        height: 15px;
+        width: 15px;
+    }
+    .size3
+    {
+        height: 20px;
+        width: 20px;
+    }
+    .size4
+    {
+        height: 25px;
+        width: 25px;
+    }
+</style>
+<body>
+    <div class="bigger">
+    <div class="size-box">
+        <div class="size1 size"></div>
+        <div class="size2 size "></div>
+        <div class="size3 size" ></div>
+        <div class="size4 size"></div>
+    </div>
+</div>
+    <script>
+        //event bubbling .
+        let sizeBox=document.querySelector(".size-box");
+        sizeBox.addEventListener("click",function(e){
+            let elems=["size1","size2","size3","size4"];
+            //actual event occur -> target.
+            //class
+
+          let allTheClasses=  e.target.classList;
+          let firstClass=allTheClasses[0];
+          let test=elems.includes(firstClass);
+          if(test){
+              console.log(firstClass);
+          }
+            //event listener -> currentTarget
+            console.log(e.currentTarget);
+        })
+    </script>
+</body>
+</html>

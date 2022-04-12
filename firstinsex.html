@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0px;
+        }
+        .fas{
+            font-size: 2rem;
+            margin-right: 30px;
+            margin-left: 30px;
+            margin-top: 0px;
+        }
+        
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<i class="fas fa-square"></i>
+<i class="fas fa-grip-lines-vertical"></i>
+
+<canvas></canvas>
+</body>
+<script>
+   let canvasBoard=document.querySelector("canvas");
+   let rectTool=document.querySelector(".fa-square");
+   let lineTool=document.querySelector(".fa-grip-lines-vertical");
+   let cTool="rectTool";
+    canvasBoard.width=window.innerWidth;
+    canvasBoard.height=window.innerHeight;
+    let tool = canvasBoard.getContext("2d");
+    let body = document.querySelector("body");
+    // tool.strokeStyle="red";
+    // tool.strokeRect(50,50,200,200);
+    // tool.fillStyle="green";
+    // tool.fillRect(0,0,200,200);
+
+    rectTool.addEventListener("click",function(){
+        console.log("rectangle icon is clicked");
+        cTool="rectTool";
+    })
+    lineTool.addEventListener("click",function(){
+        console.log("line icon is clicked");
+        cTool="lineTool";
+    })
+   let boardTop= canvasBoard.getBoundingClientRect().top;
+   let boardleft= canvasBoard.getBoundingClientRect().left;
+   let ix,iy,fx,fy;
+   
+body.addEventListener("mousedown",function(e){
+    console.log("mouse down is happening");
+    ix = e.clientX+boardleft;
+    iy = e.clientY-boardTop;
+})
+
+body.addEventListener("mouseup",function(e){
+    console.log("mouse up is happening");
+     fx = e.clientX+boardleft;
+    fy = e.clientY-boardTop;
+   let width=fx-ix;
+   let height=fy-iy;
+   if(cTool== "rectTool"){ 
+       tool.strokeRect(ix,iy,width,height);
+   }
+   else{
+        tool.beginPath();
+        tool.moveTo(ix,iy);
+        tool.lineTo(fx,fy);
+        tool.stroke();
+   }
+})
+
+</script>
+</html>   
